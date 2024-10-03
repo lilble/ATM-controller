@@ -85,5 +85,16 @@ class TestATMController(unittest.TestCase):
         self.atm.select_account('10000001')
         self.assertFalse(self.atm.withdraw(2000))
 
+    def test_deposit_and_withdraw(self):
+        self.atm.insert_card('1111-1111-1111-5555')
+        self.atm.enter_pin('1235')
+        self.atm.select_account('50000001')
+        self.atm.deposit(500)
+        self.atm.withdraw(200)
+        self.atm.withdraw(200)
+        self.atm.deposit(1000)
+        self.atm.deposit(10)
+        self.assertEqual(self.atm.check_balance(), 1120)
+
 if __name__ == '__main__':
     unittest.main()
